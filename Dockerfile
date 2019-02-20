@@ -22,7 +22,7 @@ RUN cd /opt &&\
     make &&\
     make install
 
-# use this gcc compiler
+# use this gcc compiler from now on
 ENV PATH=$INSTALL_PATH:$PATH
 
 # install GSL v1.15 
@@ -46,7 +46,7 @@ RUN cd /opt &&\
     make test &&\
     make install
     
-# install fotran
+# install fortran
 RUN yum install -y gcc-gfortran
     
 # install HDF5 v1.8.20
@@ -69,7 +69,7 @@ RUN cd /opt &&\
     make install
     
 # install BLAS and LAPACK
-RUN yum install -y blas lapack
+RUN yum install -y blas blas-devel lapack
 
 # install FFTW 3.3.4 (optional)
 RUN cd /opt &&\
@@ -88,15 +88,8 @@ RUN cd /opt &&\
     make linux-g++  &&\
     cp bin/* /usr/local/bin/.
     
-# install matheval v1.1.11 (optional)
-#RUN yum install -y guile-2.0 guile-2.0-dev
-#RUN cd /opt &&\
-#    wget https://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz &&\
-#    tar xvfz libmatheval-1.1.10.tar.gz &&\
-#    cd libmatheval-1.1.10 &&\
-#    ./configure --prefix=$INSTALL_PATH/
-    
 # install Perl modules
+RUN yum install -y expat-devel
 RUN yum install -y perl &&\
     yum install -y cpan
 ENV PERL_MM_USE_DEFAULT=1
@@ -117,33 +110,35 @@ RUN cpan -i XML::Validator::Schema
 RUN cpan -i Sort::Topological
 RUN cpan -i Text::Template
 RUN cpan -i List::Uniq
-    
-    RUN yum install -y expat-devel
 RUN cpan -i XML::SAX::Expat
 RUN cpan -i XML::Simple
 RUN cpan -i DateTime
 RUN cpan -i Regexp::Common
 RUN cpan -i File::Next
 RUN cpan -i XML::Validator::Schema
-#RUN cpan -i Fortran::Utils
+RUN cpan -i List::MoreUtils
  
-RUN yum install -y patch
-
-RUN yum install -y mercurial
-RUN yum install -y openssh-clients
 
 # install Galacticus
+RUN yum install -y patch zlib-devel
+RUN yum install -y mercurial openssh-clients
+
 RUN cd /usr/local &&\
-    hg clone https://lucacinquini@bitbucket.org/galacticusdev/galacticus &&\
+    hg clone https://hg@bitbucket.org/galacticusdev/galacticus &&\
     cd galacticus &&\
     hg update v0.9.6
     
-ENV LD_LIBRARY_PATH /usr/lib64:/usr/local/lib64:/usr/local/lib
-
-RUN yum install -y zlib-devel
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/lib64:/usr/local/lib
 #RUN ln -s /usr/lib64/libblas.so.3 /usr/lib64/libblas.so
-RUN install -y blas-devel
-RUN cpan -i List::MoreUtils
-#RUN cd /usr/local/galacticus &&\
-#    export GALACTICUS_EXEC_PATH=`pwd` &&
-#    make Galacticus.exe       
+
+RUN cd /usr/local/galacticus &&\
+    export GALACTICUS_EXEC_PATH=`pwd` &&\
+    make Galacticus.exe       
+
+# install matheval v1.1.11 (optional)
+#RUN yum install -y guile-2.0 guile-2.0-dev
+#RUN cd /opt &&\
+#    wget https://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz &&\
+#    tar xvfz libmatheval-1.1.10.tar.gz &&\
+#    cd libmatheval-1.1.10 &&\
+#    ./configure --prefix=$INSTALL_PATH/
