@@ -7,5 +7,7 @@ Docker engine installed and running on your system
 
 ## Quick Start
 
-docker pull galacticus:latest
+docker pull galacticus/galacticus:latest
+
+docker run -it galacticus:binary-centos6 galacticus_default_latest_x86_64.exe parameters/quickTest.xml
 
