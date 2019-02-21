@@ -11,7 +11,7 @@ Docker engine installed and running on your system
   * docker pull galacticus/galacticus:source-centos6
 
 * Start a container from the image:
-  * docker run --rm --name galacticus -it galacticus:source-centos6 /bin/bash
+  * docker run --rm --name galacticus -it galacticus/galacticus:source-centos6 /bin/bash
 
 * Once inside the container, run the model with sample parameters:
   * ./Galacticus.exe parameters/quickTest.xml
