@@ -1,0 +1,29 @@
+# Galacticus Docker image
+# code downloads: https://users.obs.carnegiescience.edu/abenson/galacticus/versions/
+FROM centos:6
+
+RUN yum -y update &&\
+    yum -y install vim wget patch gcc-gfortran
+    
+# install source code
+RUN cd /usr/local &&\
+    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus.tar.bz2 &&\
+    tar xvfj galacticus.tar.bz2
+    
+# install data
+RUN cd /usr/local &&\
+    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
+    tar xvfj galacticus_datasets.tar.bz2
+    
+# download pre-compiled binary
+RUN cd /usr/local/galacticus &&\
+    wget https://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_default_latest_x86_64.exe &&\
+    chmod u=wrx galacticus_default_latest_x86_64.exe
+    
+# set environment
+ENV GALACTICUS_EXEC_PATH /usr/local/galacticus
+ENV GALACTICUS_DATA_PATH /usr/local/galacticus_datasets
+ENV PATH .:$PATH
+
+# working directory
+WORKDIR /usr/local/galacticus
