@@ -1,5 +1,5 @@
 # galacticus-docker
-Docker containers to run Galacticus model
+Docker containers to run the Galacticus model
 
 ## Pre-Requisites
 
