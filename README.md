@@ -7,7 +7,8 @@ Docker engine installed and running on your system
 
 ## Quick Start
 
-docker pull galacticus/galacticus:source-centos6
+* Download image from Docker repository:
+  * docker pull galacticus/galacticus:source-centos6
 
 docker run --rm --name galacticus -it galacticus:source-centos6 /bin/bash
 
