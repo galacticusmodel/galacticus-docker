@@ -19,7 +19,6 @@ Docker engine installed and running on your system
 * Copy the output file from the Docker container to the local host, using another terminal window:
   * docker cp galacticus:/usr/local/galacticus/galacticus.hdf5 .
 
-* Exit the container, loosing all data inside the container:
-  * from the docker window: 
-    * exit
+* Exit the container, loosing all data inside the container. Back from inside the container window:
+  * exit
 
