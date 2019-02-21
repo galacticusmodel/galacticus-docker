@@ -133,7 +133,18 @@ ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/lib64:/usr/local/lib
 
 RUN cd /usr/local/galacticus &&\
     export GALACTICUS_EXEC_PATH=`pwd` &&\
-    make Galacticus.exe       
+    make Galacticus.exe   
+    
+# download datasets
+RUN cd /usr/local &&\
+    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
+    tar xvfj galacticus_datasets.tar.bz2 &&\
+    rm galacticus_datasets.tar.bz2
+    
+# setup for running
+ENV GALACTICUS_EXEC_PATH=/usr/local/galacticus/
+ENV GALACTICUS_DATA_PATH=/usr/local/galacticus_datasets
+WORKDIR /usr/local/galacticus
 
 # install matheval v1.1.11 (optional)
 #RUN yum install -y guile-2.0 guile-2.0-dev
