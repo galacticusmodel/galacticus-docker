@@ -1,6 +1,9 @@
 # galacticus-docker
 Docker containers to run the Galacticus model
 
+# DISCLAIMER: THIS IS A WORK IN PROGRESS AND ABSOLUTELY NOT SUPPORTED AT THIS TIME. 
+# USAGE OF THE SOFTWARE ACCESSIBLE FORM THIS REPOSITORY IS NOT RECOMMENDED TO ANYONE OUTSIDE OF THE CORE DATA SCIENCE PROJECT TEAM.
+
 ## Pre-Requisites
 
 Docker engine installed and running on your system
