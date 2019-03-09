@@ -126,7 +126,8 @@ RUN yum install -y mercurial openssh-clients
 RUN cd /usr/local &&\
     hg clone https://hg@bitbucket.org/galacticusdev/galacticus &&\
     cd galacticus &&\
-    hg update v0.9.6
+    hg pull && hg update workflow
+#    hg update v0.9.6
     
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/lib64:/usr/local/lib
 #RUN ln -s /usr/lib64/libblas.so.3 /usr/lib64/libblas.so
