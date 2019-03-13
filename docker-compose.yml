@@ -1,0 +1,12 @@
+# Docker-compose file to execute a Galacticus run
+version: '3.3'
+
+services:
+
+   galacticus:
+     image: galacticus/galacticus:source-centos6
+     entrypoint: /usr/local/bin/docker-entrypoint.sh
+     volumes:
+        - ./data:/data
+        - ./docker-entrypoint.sh:/usr/local/bin/docker-entrypoint.sh
+  
