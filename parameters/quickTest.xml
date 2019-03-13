@@ -67,7 +67,7 @@
   <mergerTreeBuildMassesMethod value="sampledDistributionUniform">
     <massTreeMinimum value="1.0e10"/>
     <massTreeMaximum value="1.0e13"/>
-    <treesPerDecade value="2"/>
+    <treesPerDecade value="@TREES_PER_DECADE@"/>
   </mergerTreeBuildMassesMethod>
   <!-- Substructure hierarchy options -->
   <nodeMergersMethod value="singleLevelHierarchy"/>
@@ -245,8 +245,8 @@
   </mergerTreeOutputterMethod>
 
 <evolveForestsWorkShareMethod value="stride">
-    <stride value="2"/>
-    <offset value="0"/>
+    <stride value="@STRIDE@"/>
+    <offset value="@OFFSET@"/>
     <evolveForestsWorkShareMethod value="cyclic"/>
   </evolveForestsWorkShareMethod>
 
