@@ -151,7 +151,7 @@ WORKDIR /usr/local/galacticus
 COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
 
 # script to execute the model with input arguments
-COPY run.sh /usr/local/galacticus/run.sh
+COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 
 # install matheval v1.1.11 (optional)
 #RUN yum install -y guile-2.0 guile-2.0-dev
