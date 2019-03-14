@@ -4,18 +4,17 @@
 set -e
 
 # parse command line arguments
-for ARGUMENT in "$@"
-do
-    KEY=$(echo $ARGUMENT | cut -f1 -d=)
-    VALUE=$(echo $ARGUMENT | cut -f2 -d=)   
-
-    case "$KEY" in
-            TREES_PER_DECADE)	TREES_PER_DECADE=${VALUE} ;;
-            STRIDE)    			STRIDE=${VALUE} ;;  
-            OFFSET)    			OFFSET=${VALUE} ;;
-            *)   
-    esac    
-done
+#for ARGUMENT in "$@"
+#do
+#    KEY=$(echo $ARGUMENT | cut -f1 -d=)
+#    VALUE=$(echo $ARGUMENT | cut -f2 -d=)   
+#    case "$KEY" in
+#            TREES_PER_DECADE)	TREES_PER_DECADE=${VALUE} ;;
+#            STRIDE)    			STRIDE=${VALUE} ;;  
+#            OFFSET)    			OFFSET=${VALUE} ;;
+#            *)   
+#    esac    
+#done
 
 # echo arguments
 echo "TREES_PER_DECADE = $TREES_PER_DECADE"
