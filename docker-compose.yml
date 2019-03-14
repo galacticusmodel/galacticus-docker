@@ -1,9 +1,12 @@
-# Docker-compose file to execute a Galacticus run
+# Docker-compose file to execute a single Galacticus run
 # Requires the following environment variables to be set:
-# TREES_PER_DECADE
-# STRIDE
-# OFFSET
-# DATA_DIRECTORY
+
+# DATA_DIRECTORY (mandatory)
+# TREES_PER_DECADE (optional, will default to 2)
+# STRIDE (optional, will default to 1)
+# OFFSET (optional, will default to 0)
+# PARAMETER_FILE (optional, defaults to parameters/quickTest.xml)
+
 
 version: '3.3'
 
@@ -14,9 +17,10 @@ services:
      container_name: galacticus
      entrypoint: /usr/local/galacticus/run_galacticus.sh
      environment:
-        - TREES_PER_DECADE
-        - STRIDE
-        - OFFSET
+        - TREES_PER_DECADE=${TREES_PER_DECADE:-2}
+        - STRIDE=${STRIDE:-1}
+        - OFFSET=${OFFSET:-0}
+        - PARAMETER_FILE=${PARAMETER_FILE:-parameters/quickTest.xml}
         - DATA_DIRECTORY=/data
      #command: ["TREES_PER_DECADE=2", "STRIDE=2", "OFFSET=0"]
      volumes:
