@@ -147,6 +147,12 @@ ENV GALACTICUS_EXEC_PATH=/usr/local/galacticus/
 ENV GALACTICUS_DATA_PATH=/usr/local/galacticus_datasets
 WORKDIR /usr/local/galacticus
 
+# copy parameters template
+COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
+
+# script to execute the model with input arguments
+COPY run.sh /usr/local/galacticus/run.sh
+
 # install matheval v1.1.11 (optional)
 #RUN yum install -y guile-2.0 guile-2.0-dev
 #RUN cd /opt &&\
