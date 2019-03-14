@@ -3,6 +3,8 @@
 
 set -e
 
+printenv
+
 # read arguments from environment, or use default values
 PARAMETER_FILE=${PARAMETER_FILE:-parameters/quickTest.xml}
 TREES_PER_DECADE=${TREES_PER_DECADE:-2}
