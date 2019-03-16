@@ -1,6 +1,12 @@
 # Galacticus Docker image
 # code downloads: https://users.obs.carnegiescience.edu/abenson/galacticus/versions/
-FROM centos:6
+# Uses Docker multi-stage build to first build the Galacticus executable,
+# then copies it to the final Docker image
+
+##############################################
+# Stage 1 build
+##############################################
+FROM centos:6 as build
 
 RUN yum -y update &&\
     yum -y install vim wget make 
@@ -136,6 +142,31 @@ RUN cd /usr/local/galacticus &&\
     export GALACTICUS_EXEC_PATH=`pwd` &&\
     make Galacticus.exe   
     
+# install matheval v1.1.11 (optional)
+#RUN yum install -y guile-2.0 guile-2.0-dev
+#RUN cd /opt &&\
+#    wget https://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz &&\
+#    tar xvfz libmatheval-1.1.10.tar.gz &&\
+#    cd libmatheval-1.1.10 &&\
+#    ./configure --prefix=$INSTALL_PATH/
+##############################################
+# Stage 2 build
+##############################################
+FROM centos:6
+
+# install system libraries that are needed at runtime
+RUN yum -y update &&\
+    yum -y install vim wget patch gcc-gfortran
+
+# copy the full installation directory, including the executable
+COPY --from=build /usr/local/galacticus /usr/local/galacticus 
+
+# copy dynamically linked libraries
+COPY --from=build /usr/local/lib64 /usr/local/lib64
+COPY --from=build /usr/lib64 /usr/lib64
+COPY --from=build /usr/local/lib /usr/local/lib
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib64:/usr/lib64:/usr/local/lib
+    
 # download datasets
 RUN cd /usr/local &&\
     wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
@@ -154,11 +185,3 @@ COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
 COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 
 ENTRYPOINT /usr/local/galacticus/run_galacticus.sh
-
-# install matheval v1.1.11 (optional)
-#RUN yum install -y guile-2.0 guile-2.0-dev
-#RUN cd /opt &&\
-#    wget https://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz &&\
-#    tar xvfz libmatheval-1.1.10.tar.gz &&\
-#    cd libmatheval-1.1.10 &&\
-#    ./configure --prefix=$INSTALL_PATH/
