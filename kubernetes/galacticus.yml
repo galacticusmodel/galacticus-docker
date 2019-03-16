@@ -1,0 +1,27 @@
+# Kubernetes job to run a single iteration of Galacticus
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: galacticus-
+  labels:
+    app: galacticus
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: galacticus
+          image: galacticus/galacticus
+          command:
+            - /usr/local/galacticus/run_galacticus.sh
+#          env:
+#            - name: TREES_PER_DECADE
+#              value: 2
+#            - name: STRIDE
+#              value: 1
+#            - name: OFFSET
+#              value: 0
+#            - name: PARAMETER_FILE
+#              value: parameters/quickTest.xml
+#            - name: DATA_DIRECTORY
+#              value: /data              
