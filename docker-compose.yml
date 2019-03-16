@@ -14,8 +14,8 @@ services:
 
    galacticus:
      image: galacticus/galacticus:latest
-     container_name: galacticus
-     entrypoint: /usr/local/galacticus/run_galacticus.sh
+     build: .
+     #container_name: galacticus
      environment:
         - TREES_PER_DECADE=${TREES_PER_DECADE:-2}
         - STRIDE=${STRIDE:-1}
