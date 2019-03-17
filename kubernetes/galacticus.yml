@@ -14,14 +14,22 @@ spec:
           image: galacticus/galacticus
           command:
             - /usr/local/galacticus/run_galacticus.sh
-          envFrom:
-            - configMapRef:
-                name: galacticus-config
+          env:
+            - name: TREES_PER_DECADE
+              value: "@TREES_PER_DECADE@"
+            - name: STRIDE
+              value: "@STRIDE@"
+            - name: OFFSET
+              value: "@OFFSET@"
+            - name: PARAMETER_FILE
+              value: "@PARAMETER_FILE@"
+            - name: DATA_DIRECTORY
+              value: /data    
           volumeMounts:
             - name: data-directory
               mountPath: /data         
       volumes: 
         - name: data-directory
           hostPath:
-            path: /tmp
-            type: Directory
+            path: "@HOST_DIRECTORY@"
+            type: Directory 
