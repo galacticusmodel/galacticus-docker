@@ -31,4 +31,5 @@ spec:
       volumes: 
         - name: data-directory
           hostPath:
-            path: /Users/cinquini/data/galacticus
+            path: /tmp
+            type: Directory
