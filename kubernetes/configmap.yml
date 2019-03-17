@@ -1,0 +1,12 @@
+# Deafult configuration for a Galacticus job
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: galacticus-config
+  namespace: default
+data:
+  TREES_PER_DECADE: "2"
+  STRIDE: "1"
+  OFFSET: "0"
+  PARAMETER_FILE: parameters/quickTest.xml
+  DATA_DIRECTORY: /data

@@ -1,4 +1,5 @@
 # Script to run several iterations of Galacticus
+# in separate containers
 
 # arguments - change as needed
 export DATA_DIRECTORY=/tmp
