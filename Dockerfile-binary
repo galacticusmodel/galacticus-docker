@@ -3,7 +3,7 @@
 FROM centos:6
 
 RUN yum -y update &&\
-    yum -y install vim wget patch gcc-gfortran
+    yum -y install vim wget patch gcc-gfortran git
     
 # install source code
 RUN cd /usr/local &&\
@@ -26,5 +26,14 @@ ENV GALACTICUS_EXEC_PATH /usr/local/galacticus
 ENV GALACTICUS_DATA_PATH /usr/local/galacticus_datasets
 ENV PATH .:$PATH
 
+# copy parameters template
+#COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
+COPY parameters/ /usr/local/galacticus/parameters/
+
+# script to execute the model with input arguments
+COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
+
 # working directory
 WORKDIR /usr/local/galacticus
+
+#ENTRYPOINT /usr/local/galacticus/run_galacticus.sh
