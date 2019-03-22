@@ -15,8 +15,6 @@ export STRIDE=2
 for ((i=0;i<=$STRIDE-1;i++)); 
 do
    	export OFFSET=$i
-   
-   	# create Kubernetes config map storing parameters for the job
    	echo "Executing iteration for stride=$STRIDE offset=$i"
    	
    	# interpolate the job manifest in place
