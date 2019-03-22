@@ -179,9 +179,12 @@ ENV GALACTICUS_DATA_PATH=/usr/local/galacticus_datasets
 WORKDIR /usr/local/galacticus
 
 # copy parameters template
-COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
+#COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
+COPY parameters/ /usr/local/galacticus/parameters/
 
 # script to execute the model with input arguments
 COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 
 ENTRYPOINT /usr/local/galacticus/run_galacticus.sh
+
+RUN yum install -y git
