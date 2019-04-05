@@ -14,12 +14,12 @@ Docker engine installed and running on your system
   * docker pull galacticus/galacticus:latest
 
 * Start a container from the image:
-  * docker run --rm --name galacticus -it galacticus/galacticus:source-centos6 /bin/bash
+  * docker run --rm --name galacticus -it galacticus/galacticus:latest bash
 
-* Once inside the container, run the model with sample parameters:
+* Once inside the container, run the model with sample parameters. This will generate a file named 'galacticus.hdf5' in the local directory
   * ./Galacticus.exe parameters/quickTest.xml
 
-* Copy the output file from the Docker container to the local host, using another terminal window:
+* Copy the output file from the Docker container to the local host. Start another terminal window:
   * docker cp galacticus:/usr/local/galacticus/galacticus.hdf5 .
 
 * Exit the container, loosing all data inside the container. Back from inside the container window:
