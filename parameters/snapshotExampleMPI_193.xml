@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <parameters>
   <formatVersion>2</formatVersion>
-  <version>0.9.6</version>
+  <version>0.9.4</version>
   <verbosityLevel value="2"/>
   <evolveForestsWorkShareMethod value="cyclic"/>
   <powerSpectrumNonlinearMethod value="peacockDodds1996"/>
@@ -48,7 +48,7 @@
   <linkingLength value="0.2"/>
   </virialDensityContrastMethod>
   <mergerTreeConstructorMethod value="read">
-    <fileNames value="Tree_UNIT_001_SF10000000_d1.hdf5"/>
+    <fileNames value="/usr/local/galacticus/parameters/Tree_UNIT_001_SF10000000_d1.hdf5"/>
     <outputTimeSnapTolerance value="0.0"/>
     <presetMergerTimes value="false"/>
     <presetMergerNodes value="false"/>
@@ -90,7 +90,10 @@
   </hotHaloMassDistributionCoreRadiusMethod>
   <hotHaloAngularMomentumAlwaysGrows value="true"/>
   <hotHaloAngularMomentumLossFraction value="0.3"/>
-  <hotHaloOutflowReturnRate value="5.0"/>
+  <hotHaloOutflowReincorporationMethod value="haloDynamicalTime">
+    <multiplier value="5.0"/>
+  </hotHaloOutflowReincorporationMethod>
+
   <coolingFunctionMethod value="atomicCIECloudy"/>
   <coolingSpecificAngularMomentumMethod value="constantRotation">
     <sourceAngularMomentumSpecificMean value="hotGas"/>
@@ -118,8 +121,11 @@
   <tidalStrippingSpheroidsMethod value="null"/>
   <satelliteTidalFieldMethod value="null"/>
   <galacticStructureRadiusSolverMethod value="adiabatic"/>
-  <adiabaticContractionGnedinA value="0.73"/>
-  <adiabaticContractionGnedinOmega value="0.7"/>
+  <galacticStructureRadiiInitialMethod value="gnedin2004">
+    <A value="0.73"/>
+    <omega value="0.7"/>
+  </galacticStructureRadiiInitialMethod>
+
   <spheroidAngularMomentumAtScaleRadius value="0.5"/>
   <galacticDynamicsBarInstabilityMethod value="efstathiou1982">
   <stabilityThresholdGaseous value="0.7"/>
@@ -140,10 +146,14 @@
   </starFormationTimescaleSpheroidsMethod>
   <stellarPopulationPropertiesMethod value="instantaneous"/>
   <stellarPopulationSpectraMethod value="FSPS"/>
-  <imfSelectionMethod value="fixed"/>
-  <imfSelectionFixed value="Chabrier"/>
-  <imfChabrierRecycledInstantaneous value="0.46"/>
-  <imfChabrierYieldInstantaneous value="0.0351"/>
+  <stellarPopulationSelectorMethod value="fixed"/>
+  
+  <initialMassFunctionMethod value="chabrier2001"/>
+  <stellarPopulationMethod value="standard">
+    <recycledFraction value="0.46"/>
+    <metalYield value="0.0351"/>
+  </stellarPopulationMethod>
+
   <hotHaloExcessHeatDrivesOutflow value="true"/>
   <blackHoleHeatsHotHalo value="true"/>
   <starFormationFeedbackDisksMethod value="powerLaw">
@@ -167,7 +177,7 @@
       <viscosityOption value="fit"/>
     </accretionDisksADAFMethod>
   </accretionDisksMethod>
-  <blackHoleBinaryMergersMethod value="Rezzolla2008"/>
+  <blackHoleBinaryMergersMethod value="rezzolla2008"/>
   <blackHoleSeedMass value="100"/>
   <blackHoleWindEfficiency value="0.0072"/>
   <blackHoleWindEfficiencyScalesWithRadiativeEfficiency value="true"/>
@@ -177,22 +187,32 @@
   <bondiHoyleAccretionHotModeOnly value="true"/>
   <satelliteOrbitStoreOrbitalParameters value="true"/>
   <virialOrbitMethod value="benson2005"/>
-  <satelliteMergingTimescalesMethod value="jiang2008"/>
-  <mergingTimescaleMultiplier value="2.2625"/>
-  <satelliteMergingMassMovementsMethod value="simple"/>
-  <minorMergerGasMovesTo value="spheroid"/>
-  <satelliteMergingRemnantSizeMethod value="Cole2000"/>
-  <majorMergerMassRatio value="0.5698"/>
-  <mergerRemnantSizeOrbitalEnergy value="1"/>
+  <satelliteMergingTimescalesMethod value="jiang2008">
+  <timescaleMultiplier value="2.2625"/>
+  </satelliteMergingTimescalesMethod>
+  <mergerMassMovementsMethod value="simple">
+  <destinationGasMinorMerger value="spheroid"/>
+    <massRatioMajorMerger value="0.5698"/>
+  </mergerMassMovementsMethod>
+  <mergerRemnantSizeMethod value="cole2000">
+  <energyOrbital value="1"/>
+  </mergerRemnantSizeMethod>
   <spheroidnergeticOutflowMassRate value="1.0e-2"/>
   <odeToleranceAbsolute value="0.01"/>
   <odeToleranceRelative value="0.001"/>
   <diskMassToleranceAbsolute value="1.0e-6"/>
   <spheroidMassToleranceAbsolute value="1.0e-6"/>
-  <timestepHostAbsolute value="1.0"/>
-  <timestepHostRelative value="0.1"/>
-  <timestepSimpleAbsolute value="1.0"/>
-  <timestepSimpleRelative value="0.1"/>
+  <mergerTreeEvolverMethod value="standard">
+    <timestepHostAbsolute value="1.0"/>
+    <timestepHostRelative value="0.1"/>
+    <allTreesExistAtFinalTime value="false"/>
+  </mergerTreeEvolverMethod>
+
+  <mergerTreeEvolveTimestepMethod value="simple">
+    <timeStepAbsolute value="1.0"/>
+    <timeStepRelative value="0.1"/>
+  </mergerTreeEvolveTimestepMethod>
+
   <odeAlgorithm value="BDF"/>
   <odeLatentIntegratorType value="trapezoidal"/>
   <odeLatentIntegratorOrder value="15"/>
@@ -202,9 +222,11 @@
   <ageStatisticsStandardIsInactive value="true"/>
   <spheroidOutputStarFormationRate value="true"/>
   <diskOutputStarFormationRate value="true"/>
-  <allTreesExistAtFinalTime value="false"/>
   <treeNodeMethodPosition value="preset"/>
-  <outputRedshifts value="0.00000000 0.48986889 0.9872814 1.48015873 2.02755071 2.53481796 3.0371417"/>
+  <outputTimesMethod value="list">
+    <redshifts value="0.00000000 0.48986889 0.9872814 1.48015873 2.02755071 2.53481796 3.0371417"/>
+  </outputTimesMethod>
+
   <outputDensityContrastData value="true"/>
   <outputDensityContrastValues value="200 500"/>
   <outputDensityContrastDataDarkOnly value="false"/>
