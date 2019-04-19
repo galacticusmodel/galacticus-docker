@@ -1,9 +1,10 @@
 # Galacticus Docker image
 # code downloads: https://users.obs.carnegiescience.edu/abenson/galacticus/versions/
-FROM centos:6
+FROM centos:7
 
 RUN yum -y update &&\
-    yum -y install vim wget patch gcc-gfortran git
+    yum -y install vim wget patch gcc-gfortran git bzip2 &&\
+    yum -y install libgfortran5
     
 # install source code
 RUN cd /usr/local &&\
@@ -22,9 +23,15 @@ RUN cd /usr/local/galacticus &&\
     chmod u=wrx Galacticus.exe
     
 # set environment
-ENV GALACTICUS_EXEC_PATH /usr/local/galacticus
-ENV GALACTICUS_DATA_PATH /usr/local/galacticus_datasets
-ENV PATH .:$PATH
+ENV GALACTICUS_EXEC_PATH=/usr/local/galacticus
+ENV GALACTICUS_DATA_PATH=/usr/local/galacticus_datasets
+ENV PATH=.:$PATH
+ENV LD_LIBRARY_PATH=/usr/local/lib64:/usr/lib64:/usr/local/lib:/usr/lib/gcc/x86_64-redhat-linux/4.4.4/
+
+# download additional executables into GALACTICUS_DATA_PATH
+RUN cd $GALACTICUS_DATA_PATH &&\
+    wget https://bitbucket.org/galacticusdev/galacticus/downloads/tools.tar.bz2 &&\
+    tar xvfj tools.tar.bz2
 
 # copy parameters template
 #COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
@@ -35,5 +42,10 @@ COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 
 # working directory
 WORKDIR /usr/local/galacticus
+
+# cleanup
+RUN rm /usr/local/galacticus_datasets/tools.tar.bz2 \
+       /usr/local/galacticus_datasets.tar.bz2 \
+       /usr/local/galacticus.tar.bz2
 
 #ENTRYPOINT /usr/local/galacticus/run_galacticus.sh
