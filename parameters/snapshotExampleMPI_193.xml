@@ -48,7 +48,7 @@
   <linkingLength value="0.2"/>
   </virialDensityContrastMethod>
   <mergerTreeConstructorMethod value="read">
-    <fileNames value="/usr/local/galacticus/trees/Tree_UNIT_001_SF10000000_d1.hdf5"/>
+    <fileNames value="/usr/local/galacticus/trees/Tree_UNIT_001_SF10000_d1.hdf5"/>
     <outputTimeSnapTolerance value="0.0"/>
     <presetMergerTimes value="false"/>
     <presetMergerNodes value="false"/>
