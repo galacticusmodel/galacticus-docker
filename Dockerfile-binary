@@ -3,7 +3,7 @@
 FROM centos:7
 
 RUN yum -y update &&\
-    yum -y install vim wget patch gcc-gfortran git bzip2 &&\
+    yum -y install vim wget patch gcc-gfortran git bzip2 make &&\
     yum -y install libgfortran5
     
 # install source code
