@@ -5,6 +5,11 @@ FROM centos:7
 RUN yum -y update &&\
     yum -y install vim wget patch gcc-gfortran git bzip2 make &&\
     yum -y install libgfortran5
+
+# install HDF5 libraries to inspect output
+RUN yum install –y epel-release &&\
+    yum-config-manager --enable epel &&\
+    yum install -y hdf5-devel
     
 # install source code
 RUN cd /usr/local &&\
