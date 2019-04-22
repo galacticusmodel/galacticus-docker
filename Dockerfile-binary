@@ -13,13 +13,19 @@ RUN yum -y install epel-release &&\
     
 # install source code
 RUN cd /usr/local &&\
-    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus.tar.bz2 &&\
-    tar xvfj galacticus.tar.bz2
+    wget https://bitbucket.org/galacticusdev/galacticus/get/default.tar.gz -O galacticus.tar.gz &&\
+    tar xvfz galacticus.tar.gz &&\
+    mv galacticusdev-galacticus-* galacticus
+    #wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus.tar.bz2 &&\
+    #tar xvfj galacticus.tar.bz2
     
 # install data
 RUN cd /usr/local &&\
-    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
-    tar xvfj galacticus_datasets.tar.bz2
+    wget https://bitbucket.org/galacticusdev/datasets/get/default.tar.gz -O galacticus_datasets.tar.gz &&\
+    tar xvfz galacticus_datasets.tar.gz &&\
+    mv galacticusdev-datasets-* galacticus_datasets
+    #wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
+    #tar xvfj galacticus_datasets.tar.bz2
     
 # download pre-compiled binary
 RUN cd /usr/local/galacticus &&\
@@ -52,8 +58,7 @@ COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 WORKDIR /usr/local/galacticus
 
 # cleanup
-RUN rm /usr/local/galacticus_datasets/tools.tar.bz2 \
-       /usr/local/galacticus_datasets.tar.bz2 \
-       /usr/local/galacticus.tar.bz2
+RUN rm /usr/local/galacticus_datasets/*.bz2 \
+       /usr/local/*.gz
 
 #ENTRYPOINT /usr/local/galacticus/run_galacticus.sh
