@@ -7,9 +7,9 @@ RUN yum -y update &&\
     yum -y install libgfortran5
 
 # install HDF5 libraries to inspect output
-RUN yum install –y epel-release &&\
+RUN yum -y install epel-release &&\
     yum-config-manager -y --enable epel &&\
-    yum install -y hdf5-devel
+    yum -y install hdf5-devel
     
 # install source code
 RUN cd /usr/local &&\
