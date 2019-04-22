@@ -43,6 +43,7 @@ RUN cd $GALACTICUS_DATA_PATH &&\
 COPY parameters/ /usr/local/galacticus/parameters/
 
 # copy example trees
+RUN mkdir /usr/local/galacticus/trees
 COPY trees/ /usr/local/galacticus/trees/
 
 # script to execute the model with input arguments
