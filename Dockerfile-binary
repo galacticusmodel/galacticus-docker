@@ -42,6 +42,9 @@ RUN cd $GALACTICUS_DATA_PATH &&\
 #COPY parameters/quickTest.xml /usr/local/galacticus/parameters/quickTest.xml
 COPY parameters/ /usr/local/galacticus/parameters/
 
+# copy example trees
+COPY trees/ /usr/local/galacticus/trees/
+
 # script to execute the model with input arguments
 COPY scripts/run_galacticus.sh /usr/local/galacticus/run_galacticus.sh
 
