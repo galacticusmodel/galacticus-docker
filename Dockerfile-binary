@@ -14,16 +14,16 @@ RUN yum -y install epel-release &&\
 # install source code
 RUN cd /usr/local &&\
     wget https://bitbucket.org/galacticusdev/galacticus/get/default.tar.gz -O galacticus.tar.gz &&\
-    tar xvfz galacticus.tar.gz &&\
-    mv galacticusdev-galacticus-* galacticus
+    mkdir galacticus &&\
+    tar xvfz galacticus.tar.gz -C galacticus --strip-components 1
     #wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus.tar.bz2 &&\
     #tar xvfj galacticus.tar.bz2
     
 # install data
 RUN cd /usr/local &&\
     wget https://bitbucket.org/galacticusdev/datasets/get/default.tar.gz -O galacticus_datasets.tar.gz &&\
-    tar xvfz galacticus_datasets.tar.gz &&\
-    mv galacticusdev-datasets-* galacticus_datasets
+    mkdir galacticus_datasets &&\
+    tar xvfz galacticus_datasets.tar.gz -C galacticus_datasets --strip-components 1
     #wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
     #tar xvfj galacticus_datasets.tar.bz2
     
@@ -41,7 +41,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib64:/usr/lib64:/usr/local/lib:/usr/lib/gcc/x86_
 
 # download additional executables into GALACTICUS_DATA_PATH
 RUN cd $GALACTICUS_DATA_PATH &&\
-    wget https://bitbucket.org/galacticusdev/galacticus/downloads/tools.tar.bz2 &&\
+     wget https://bitbucket.org/galacticusdev/galacticus/downloads/tools.tar.bz2 &&\
     tar xvfj tools.tar.bz2
 
 # copy parameters template
