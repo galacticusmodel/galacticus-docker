@@ -11,6 +11,7 @@ TREES_PER_DECADE=${TREES_PER_DECADE:-2}
 STRIDE=${STRIDE:-1}
 OFFSET=${OFFSET:-0}
 DATA_DIRECTORY=${DATA_DIRECTORY:-/tmp}
+TREE_FILE=${TREE_FILE:-/usr/local/galacticus/trees/Tree_UNIT_001_SF10000_d1.hdf5}
 
 # echo arguments
 echo "PARAMETER_FILE=$PARAMETER_FILE"
@@ -23,6 +24,7 @@ echo "OFFSET = $OFFSET"
 sed -i "s/@TREES_PER_DECADE@/$TREES_PER_DECADE/" ${PARAMETER_FILE}
 sed -i "s/@STRIDE@/$STRIDE/" ${PARAMETER_FILE}
 sed -i "s/@OFFSET@/$OFFSET/" ${PARAMETER_FILE}
+sed -i "s/@TREE_FILE@/$TREE_FILE/" ${PARAMETER_FILE}
 
 # run the model
 ./Galacticus.exe ${PARAMETER_FILE}
