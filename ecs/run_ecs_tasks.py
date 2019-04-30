@@ -2,9 +2,9 @@
 import boto3
 from time import sleep
 
-MAX_CONCURRENT_TASKS = 1
-NUM_TASKS = 10
-SLEEP_SECONDS = 1
+MAX_CONCURRENT_TASKS = 2
+NUM_TASKS = 4
+SLEEP_SECONDS = 10
 
 session = boto3.Session(profile_name='saml')
 client = session.client('ecs')
@@ -21,7 +21,8 @@ while itask < NUM_TASKS:
     
     if num_running_tasks < MAX_CONCURRENT_TASKS:
         itask += 1
-        print("Submitting task # %s" % itask)
+        tree_file= "Tree_UNIT_001_SF10000_d%s.hdf5" % itask
+        print("Submitting task for tree file=%s" % itask)
         resp = client.run_task(cluster='EDRN', 
                             taskDefinition="galacticus",
                             launchType='EC2', 
@@ -31,8 +32,8 @@ while itask < NUM_TASKS:
                                     "name": "galacticus",
                                     "environment": [
                                         {
-                                            "name": "PARAMETER_FILE",
-                                            "value": "parameters/quickTest.xml"
+                                            "name": "TREE_FILE",
+                                            "value": tree_file
                                         }]
                                     }
                                 ]
