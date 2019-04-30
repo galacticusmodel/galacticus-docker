@@ -30,4 +30,6 @@ sed -i "s/@OFFSET@/$OFFSET/" ${PARAMETER_FILE}
 # move the output to another location
 # where it can be accessed before the container exits
 hostname=`hostname`
+echo "Moving output to ${DATA_DIRECTORY}"
 mv galacticus.hdf5 ${DATA_DIRECTORY}/galacticus-${hostname}-${TREES_PER_DECADE}_${STRIDE}_${OFFSET}.hdf5
+echo "Done"
