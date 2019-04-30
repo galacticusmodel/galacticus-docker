@@ -1,0 +1,106 @@
+{
+    "taskDefinition": {
+        "status": "ACTIVE", 
+        "memory": "61440", 
+        "family": "galacticus", 
+        "placementConstraints": [], 
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+            }, 
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            }, 
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            }, 
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            }, 
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            }
+        ], 
+        "cpu": "8192", 
+        "executionRoleArn": "arn:aws:iam::account-number:role/EDRN-ecsTaskRole", 
+        "compatibilities": [
+            "EC2"
+        ], 
+        "volumes": [
+            {
+                "host": {
+                    "sourcePath": "/efs/docker/galacticus/trees"
+                }, 
+                "name": "trees"
+            }, 
+            {
+                "host": {
+                    "sourcePath": "/efs/docker/galacticus/input"
+                }, 
+                "name": "input"
+            }, 
+            {
+                "host": {
+                    "sourcePath": "/efs/docker/galacticus/output"
+                }, 
+                "name": "output"
+            }
+        ], 
+        "requiresCompatibilities": [
+            "EC2"
+        ], 
+        "taskRoleArn": "arn:aws:iam::account-number:role/EDRN-ecsTaskRole", 
+        "taskDefinitionArn": "arn:aws:ecs:us-west-2:account-number:task-definition/galacticus:6", 
+        "containerDefinitions": [
+            {
+                "environment": [
+                    {
+                        "name": "PARAMETER_FILE", 
+                        "value": "parameters/snapshotExampleMPI_193_Template.xml"
+                    }, 
+                    {
+                        "name": "TREE_FILE", 
+                        "value": "Tree_UNIT_001_SF10000_d1.hdf5"
+                    }, 
+                    {
+                        "name": "DATA_DIRECTORY", 
+                        "value": "/usr/local/galacticus/output"
+                    }
+                ], 
+                "name": "galacticus", 
+                "workingDirectory": "/usr/local/galacticus", 
+                "mountPoints": [
+                    {
+                        "sourceVolume": "trees", 
+                        "containerPath": "/usr/local/galacticus/trees"
+                    }, 
+                    {
+                        "sourceVolume": "input", 
+                        "containerPath": "/usr/local/galacticus/input"
+                    }, 
+                    {
+                        "sourceVolume": "output", 
+                        "containerPath": "/usr/local/galacticus/output"
+                    }
+                ], 
+                "image": "galacticus/galacticus:latest", 
+                "logConfiguration": {
+                    "logDriver": "awslogs", 
+                    "options": {
+                        "awslogs-region": "us-west-2", 
+                        "awslogs-stream-prefix": "ecs", 
+                        "awslogs-group": "/ecs/galacticus"
+                    }
+                }, 
+                "cpu": 0, 
+                "portMappings": [], 
+                "command": [
+                    "/usr/local/galacticus/run_galacticus.sh"
+                ], 
+                "essential": true, 
+                "volumesFrom": []
+            }
+        ], 
+        "revision": 6
+    }
+}
