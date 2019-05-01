@@ -14,9 +14,8 @@ NUM_TASKS = 4
 SLEEP_SECONDS = 10
 
 #session = boto3.Session(profile_name='saml')
-session = boto3.Session(region='us-west-2')
-client = session.client('ecs')
-#client = boto3.client('ecs')
+#client = session.client('ecs')
+client = boto3.client('ecs', region_name='us-west-2')
 
 itask = 0
 num_running_tasks = 0
