@@ -1,16 +1,25 @@
 # Python script to submit and monitor ECS tasks
 import boto3
 from time import sleep
+boto3
 
-MAX_CONCURRENT_TASKS = 2
+# maximum number of running task on this cluster,
+#  including the task running this script
+MAX_CONCURRENT_TASKS = 2 + 1
+
+# total number of galacticus tasks to be submitted
 NUM_TASKS = 4
+
+# number of seconds between task listing queries
 SLEEP_SECONDS = 10
 
 session = boto3.Session(profile_name='saml')
 client = session.client('ecs')
 
 itask = 0
+num_running_tasks = 0
 
+# submit tasks
 while itask < NUM_TASKS:
 
     response = client.list_tasks(cluster='EDRN', 
@@ -32,8 +41,8 @@ while itask < NUM_TASKS:
                                     "name": "galacticus",
                                     "environment": [
                                         {
-                                            "name": "TREE_FILE",
-                                            "value": tree_file
+                                            "name": "PAREMETER_FILE",
+                                            "value": "parameters/quickTest.xml"
                                         }]
                                     }
                                 ]
@@ -42,4 +51,14 @@ while itask < NUM_TASKS:
         print("Task submission response=%s" % resp)
     else:
         sleep(SLEEP_SECONDS)
+        
+# keep monitoring until all tasks but this one are done
+while num_running_tasks > 1:
+    response = client.list_tasks(cluster='EDRN', 
+                                 family='galacticus', 
+                                 desiredStatus='RUNNING')
+    num_running_tasks = len(response["taskArns"])
+    print("Number of running tasks:%s" % num_running_tasks)
+    sleep(SLEEP_SECONDS)
+    
     
