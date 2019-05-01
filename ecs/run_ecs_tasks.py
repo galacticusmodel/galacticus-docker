@@ -13,8 +13,9 @@ NUM_TASKS = 4
 # number of seconds between task listing queries
 SLEEP_SECONDS = 10
 
-session = boto3.Session(profile_name='saml')
-client = session.client('ecs')
+#session = boto3.Session(profile_name='saml')
+#client = session.client('ecs')
+client = boto3.client('ecs')
 
 itask = 0
 num_running_tasks = 0
