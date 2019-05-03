@@ -45,7 +45,12 @@ while itask < NUM_TASKS:
                                         {
                                             "name": "TREE_FILE",
                                             "value": tree_file
-                                        }]
+                                        },
+                                        {
+                                            "name": "PARAMETER_FILE",
+                                            "value": "snapshotExampleMPI_193_Template.xml"
+                                        }
+                                        ]
                                     }
                                 ]
                             }
