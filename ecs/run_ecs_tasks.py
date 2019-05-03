@@ -48,7 +48,7 @@ while itask < NUM_TASKS:
                                         },
                                         {
                                             "name": "PARAMETER_FILE",
-                                            "value": "snapshotExampleMPI_193_Template.xml"
+                                            "value": "parameters/snapshotExampleMPI_193_Template.xml"
                                         }
                                         ]
                                     }
