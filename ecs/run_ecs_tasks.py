@@ -3,12 +3,13 @@ import boto3
 from time import sleep
 boto3
 
-# maximum number of running task on this cluster,
-#  including the task running this script
-MAX_CONCURRENT_TASKS = 2 + 1
+
+# maximum number of running task on this cluster
+# for family='galacticus'
+MAX_CONCURRENT_TASKS = 10
 
 # total number of galacticus tasks to be submitted
-NUM_TASKS = 4
+NUM_TASKS = 100
 
 # number of seconds between task listing queries
 SLEEP_SECONDS = 10
@@ -42,8 +43,8 @@ while itask < NUM_TASKS:
                                     "name": "galacticus",
                                     "environment": [
                                         {
-                                            "name": "PAREMETER_FILE",
-                                            "value": "parameters/quickTest.xml"
+                                            "name": "TREE_FILE",
+                                            "value": tree_file
                                         }]
                                     }
                                 ]
