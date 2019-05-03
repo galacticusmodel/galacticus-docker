@@ -6,7 +6,7 @@ boto3
 
 # maximum number of running task on this cluster
 # for family='galacticus'
-MAX_CONCURRENT_TASKS = 10
+MAX_CONCURRENT_TASKS = 6
 
 # total number of galacticus tasks to be submitted
 NUM_TASKS = 100
