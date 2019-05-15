@@ -48,7 +48,7 @@
   <linkingLength value="0.2"/>
   </virialDensityContrastMethod>
   <mergerTreeConstructorMethod value="read">
-    <fileNames value="/usr/local/galacticus/input/@TREE_FILE@"/>
+    <fileNames value="@INPUT_DIRECTORY@/@TREE_FILE@"/>
     <outputTimeSnapTolerance value="0.0"/>
     <presetMergerTimes value="false"/>
     <presetMergerNodes value="false"/>

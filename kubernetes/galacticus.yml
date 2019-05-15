@@ -11,25 +11,21 @@ spec:
       restartPolicy: Never
       containers:
         - name: galacticus
-          image: galacticus/galacticus
+          image: galacticus/galacticus:latest
           command:
             - /usr/local/galacticus/run_galacticus.sh
-          env:
-            - name: TREES_PER_DECADE
-              value: "@TREES_PER_DECADE@"
-            - name: STRIDE
-              value: "@STRIDE@"
-            - name: OFFSET
-              value: "@OFFSET@"
-            - name: PARAMETER_FILE
-              value: "@PARAMETER_FILE@"
-            - name: DATA_DIRECTORY
-              value: /data    
+          #env:
+          #  - name: TREE_FILE
+          #    value: "Tree_UNIT_001_SF10000_d1.hdf5"
+          #  - name: PARAMETER_FILE
+          #    value: "parameters/snapshotExampleMPI_193_Template.xml"
+          #  - name: OUTPUT_DIRECTORY
+          #    value: "/usr/local/galacticus/output"
           volumeMounts:
             - name: data-directory
-              mountPath: /data         
+              mountPath: /usr/local/galacticus/input      
       volumes: 
         - name: data-directory
           hostPath:
-            path: "@HOST_DIRECTORY@"
+            path: "/Users/cinquini/data/galacticus/"
             type: Directory 
