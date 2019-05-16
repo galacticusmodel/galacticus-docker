@@ -23,9 +23,9 @@ spec:
           #    value: "/usr/local/galacticus/output"
           volumeMounts:
             - name: data-directory
-              mountPath: /usr/local/galacticus/input      
+              mountPath: /usr/local/galacticus/tmp      
       volumes: 
         - name: data-directory
           hostPath:
-            path: "/Users/cinquini/data/galacticus/"
+            path: "/tmp"
             type: Directory 
