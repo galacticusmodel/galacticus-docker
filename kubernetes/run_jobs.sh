@@ -6,25 +6,21 @@ set -e
 THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # arguments - change as needed
-export HOST_DIRECTORY=/tmp
-export PARAMETER_FILE=parameters/quickTest.xml
-export TREES_PER_DECADE=2
-export STRIDE=2
+HOST_DIRECTORY=/tmp # not uses, kept as example
+NUM_JOBS=3
 
 # start $STRIDE jobs
-for ((i=0;i<=$STRIDE-1;i++)); 
+for ((i=2;i<=$NUM_JOBS;i++)); 
 do
    	export OFFSET=$i
-   	echo "Executing iteration for stride=$STRIDE offset=$i"
+   	echo "Submitting job=$i"
    	
    	# interpolate the job manifest in place
    	# and use it to create a Kubernetes job
     # note the use of the '#' character instead of '/' in the first two replacements
+    TREE_FILE="Tree_UNIT_001_SF10000_d${i}.hdf5"
    	cat ${THIS_DIR}/galacticus.yml | sed "s#@HOST_DIRECTORY@#${HOST_DIRECTORY}#"\
-   	                               | sed "s#@PARAMETER_FILE@#${PARAMETER_FILE}#"\
-   	                               | sed "s/@TREES_PER_DECADE@/${TREES_PER_DECADE}/"\
-   	                               | sed "s/@STRIDE@/${STRIDE}/"\
-   	                               | sed "s/@OFFSET@/${OFFSET}/"\
+   	                               | sed "s/__TREE_FILE__/${TREE_FILE}/"\
    	                               | kubectl create -f -
    		
       
