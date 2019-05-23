@@ -14,18 +14,26 @@ spec:
           image: galacticus/galacticus:latest
           command:
             - /usr/local/galacticus/run_galacticus.sh
-          #env:
-          #  - name: TREE_FILE
-          #    value: "Tree_UNIT_001_SF10000_d1.hdf5"
-          #  - name: PARAMETER_FILE
-          #    value: "parameters/snapshotExampleMPI_193_Template.xml"
-          #  - name: OUTPUT_DIRECTORY
-          #    value: "/usr/local/galacticus/output"
+          env:
+            - name: TREE_FILE
+              value: "Tree_UNIT_001_SF10000_d1.hdf5"
+            - name: PARAMETER_FILE
+              value: "parameters/snapshotExampleMPI_193_Template.xml"
+            - name: INPUT_DIRECTORY
+              value: "/input"
+            - name: OUTPUT_DIRECTORY
+              value: "/output"
           volumeMounts:
-            - name: data-directory
-              mountPath: /usr/local/galacticus/input      
+            - name: output-directory
+              mountPath: /output
+            - name: input-directory
+              mountPath: /input
       volumes: 
-        - name: data-directory
+        - name: output-directory
           hostPath:
-            path: "/Users/cinquini/data/galacticus/"
+            path: /efs-ecs/docker/galacticus/output
             type: Directory 
+        - name: input-directory
+          hostPath:
+            path: /efs-ecs/docker/galacticus/input
+            type: Directory
