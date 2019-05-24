@@ -16,7 +16,7 @@ spec:
             - /usr/local/galacticus/run_galacticus.sh
           env:
             - name: TREE_FILE
-              value: __TREE_FILE__
+              value: "__TREE_FILE__"
               #value: "Tree_UNIT_001_SF10000_d1.hdf5"
             - name: PARAMETER_FILE
               value: "parameters/snapshotExampleMPI_193_Template.xml"
@@ -24,6 +24,8 @@ spec:
               value: "/input"
             - name: OUTPUT_DIRECTORY
               value: "/output"
+            - name: OUTPUT_FILE
+              value: "__OUTPUT_FILE__"
           volumeMounts:
             - name: output-directory
               mountPath: /output

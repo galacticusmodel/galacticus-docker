@@ -33,6 +33,7 @@ while itask < NUM_TASKS:
     if num_running_tasks < MAX_CONCURRENT_TASKS:
         itask += 1
         tree_file= "Tree_UNIT_001_SF10000_d%s.hdf5" % itask
+        outout_file = "galacticus_%s.hdf5" % itask
         print("Submitting task for tree file=%s" % itask)
         resp = client.run_task(cluster='EDRN', 
                             taskDefinition="galacticus",
@@ -45,6 +46,10 @@ while itask < NUM_TASKS:
                                         {
                                             "name": "TREE_FILE",
                                             "value": tree_file
+                                        },
+                                        {
+                                            "name": "OUTPUT_FILE",
+                                            "value": outout_file
                                         },
                                         {
                                             "name": "PARAMETER_FILE",

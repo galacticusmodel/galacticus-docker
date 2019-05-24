@@ -5,6 +5,8 @@ set -e
 
 printenv
 
+hostname=`hostname`
+
 # read arguments from environment, or use default values
 PARAMETER_FILE=${PARAMETER_FILE:-parameters/quickTest.xml}
 TREES_PER_DECADE=${TREES_PER_DECADE:-2}
@@ -12,6 +14,7 @@ STRIDE=${STRIDE:-1}
 OFFSET=${OFFSET:-0}
 INPUT_DIRECTORY=${INPUT_DIRECTORY:-/usr/local/galacticus/input}
 OUTPUT_DIRECTORY=${OUTPUT_DIRECTORY:-/tmp}
+OUTPUT_FILE=${OUTPUT_FILE:-galacticus.hdf5}
 TREE_FILE=${TREE_FILE:-Tree_UNIT_001_SF10000_d1.hdf5}
 
 # echo arguments
@@ -36,7 +39,7 @@ sed -i "s|@TREE_FILE@|$TREE_FILE|" ${PARAMETER_FILE}
 
 # move the output to another location
 # where it can be accessed before the container exits
-hostname=`hostname`
+
 echo "Moving output to ${OUTPUT_DIRECTORY}"
-mv galacticus.hdf5 ${OUTPUT_DIRECTORY}/galacticus-${hostname}-${TREES_PER_DECADE}_${STRIDE}_${OFFSET}.hdf5
+mv galacticus.hdf5 ${OUTPUT_DIRECTORY}/${OUTPUT_FILE}
 echo "Done"
