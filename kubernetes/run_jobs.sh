@@ -7,10 +7,10 @@ THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # arguments - change as needed
 HOST_DIRECTORY=/tmp # not uses, kept as example
-NUM_JOBS=3
+NUM_JOBS=100
 
 # start $STRIDE jobs
-for ((i=2;i<=$NUM_JOBS;i++)); 
+for ((i=1;i<=$NUM_JOBS;i++)); 
 do
    	echo "Submitting job=$i"
    	
