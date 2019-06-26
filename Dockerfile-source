@@ -167,11 +167,11 @@ COPY --from=build /usr/lib64 /usr/lib64
 COPY --from=build /usr/local/lib /usr/local/lib
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib64:/usr/lib64:/usr/local/lib
     
-# download datasets
+# download datasets    
 RUN cd /usr/local &&\
-    wget http://users.obs.carnegiescience.edu/abenson/galacticus/versions/galacticus_datasets.tar.bz2 &&\
-    tar xvfj galacticus_datasets.tar.bz2 &&\
-    rm galacticus_datasets.tar.bz2
+    wget https://bitbucket.org/galacticusdev/datasets/get/default.tar.gz -O galacticus_datasets.tar.gz &&\
+    mkdir galacticus_datasets &&\
+    tar xvfz galacticus_datasets.tar.gz -C galacticus_datasets --strip-components 1
     
 # setup for running
 ENV GALACTICUS_EXEC_PATH=/usr/local/galacticus/
