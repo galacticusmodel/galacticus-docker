@@ -25,7 +25,7 @@ The following instructions show how to quickly execute a Galacticus run using th
 * Exit the container, loosing all data inside the container. Back from inside the container window:
   * exit
   
-* Note: if you need to rebuild the container (typically not necessary)
+* Note: if you need to rebuild the container (typically not necessary):
   * git clone https://github.com/galacticusmodel/galacticus-docker.git (this repository)
   * docker build -f Dockerfile-binary -t galacticus/galacticus .
 
