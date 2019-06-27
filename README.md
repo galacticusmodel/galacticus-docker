@@ -4,11 +4,11 @@ Docker containers to run the Galacticus model
 # DISCLAIMER: THIS IS A WORK IN PROGRESS AND ABSOLUTELY NOT SUPPORTED AT THIS TIME. 
 # USAGE OF THE SOFTWARE ACCESSIBLE FROM THIS REPOSITORY IS NOT RECOMMENDED TO ANYONE OUTSIDE OF THE CORE DATA SCIENCE PROJECT TEAM.
 
-## Pre-Requisites
-
-Docker engine installed and running on your system
-
 ## Quick Start
+
+The following instructions show how to quickly execute a Galacticus run using a Docker container. For a more in-depth discussion of Galacticus functionality and configuration, please see the Galacticus wiki: https://bitbucket.org/galacticusdev/galacticus/wiki/Home
+
+* Pre-requisite: you must have a Docker engine installed and running on your system
 
 * Download the Galacticus image from the Docker repository:
   * docker pull galacticus/galacticus:latest
