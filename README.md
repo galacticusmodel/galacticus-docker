@@ -25,7 +25,7 @@ The following instructions show how to quickly execute a Galacticus run using th
 * Copy the output file from the Docker container to the local host. Start another terminal window:
   * docker cp galacticus:/usr/local/galacticus/galacticus.hdf5 .
 
-* Exit the container, loosing all data inside the container. Back from inside the container window:
+* Exit the container, losing all data inside the container. Back from inside the container window:
   * exit
   
 * Note: if you need to rebuild the container (typically not necessary):
