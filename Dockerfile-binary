@@ -41,7 +41,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib64:/usr/lib64:/usr/local/lib:/usr/lib/gcc/x86_
 
 # download additional executables into GALACTICUS_DATA_PATH
 RUN cd $GALACTICUS_DATA_PATH &&\
-     wget https://bitbucket.org/galacticusdev/galacticus/downloads/tools.tar.bz2 &&\
+    wget https://bitbucket.org/galacticusdev/galacticus/downloads/tools.tar.bz2 &&\
     tar xvfj tools.tar.bz2
 
 # copy parameters template
