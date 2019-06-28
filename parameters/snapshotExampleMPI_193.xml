@@ -71,7 +71,7 @@
     <accuracyFirstOrder value="0.1"/>
   </mergerTreeBranchingProbabilityMethod>
   <nodeMergersMethod value="singleLevelHierarchy"/>
-  <darkMatterProfileMethod value="NFW"/>
+  <darkMatterProfileDMOMethod value="NFW"/>
   <darkMatterProfileConcentrationMethod value="gao2008"/>
   <darkMatterProfileMinimumConcentration value="4"/>
   <haloSpinDistributionMethod value="bett2007">
@@ -120,11 +120,11 @@
   <tidalStrippingDisksMethod value="null"/>
   <tidalStrippingSpheroidsMethod value="null"/>
   <satelliteTidalFieldMethod value="null"/>
-  <galacticStructureRadiusSolverMethod value="adiabatic"/>
-  <galacticStructureRadiiInitialMethod value="gnedin2004">
+  <galacticStructureSolverMethod value="equilibrium"/>
+  <darkMatterProfileMethod value="adiabaticGnedin2004">
     <A value="0.73"/>
     <omega value="0.7"/>
-  </galacticStructureRadiiInitialMethod>
+  </darkMatterProfileMethod>
 
   <spheroidAngularMomentumAtScaleRadius value="0.5"/>
   <galacticDynamicsBarInstabilityMethod value="efstathiou1982">
@@ -198,8 +198,13 @@
   <energyOrbital value="1"/>
   </mergerRemnantSizeMethod>
   <spheroidnergeticOutflowMassRate value="1.0e-2"/>
-  <odeToleranceAbsolute value="0.01"/>
-  <odeToleranceRelative value="0.001"/>
+  <mergerTreeNodeEvolverMethod value="standard">
+    <odeToleranceAbsolute value="0.01"/>
+    <odeToleranceRelative value="0.001"/>
+    <odeAlgorithm value="bdf"/>
+    <odeLatentIntegratorOrder value="15"/>
+  </mergerTreeNodeEvolverMethod>
+
   <diskMassToleranceAbsolute value="1.0e-6"/>
   <spheroidMassToleranceAbsolute value="1.0e-6"/>
   <mergerTreeEvolverMethod value="standard">
@@ -213,9 +218,7 @@
     <timeStepRelative value="0.1"/>
   </mergerTreeEvolveTimestepMethod>
 
-  <odeAlgorithm value="BDF"/>
   <odeLatentIntegratorType value="trapezoidal"/>
-  <odeLatentIntegratorOrder value="15"/>
   <diskLuminositiesStellarInactive value="true"/>
   <spheroidLuminositiesStellarInactive value="true"/>
   <satelliteBoundMassIsInactive value="true"/>
