@@ -1,8 +1,7 @@
 # galacticus-docker
 Docker containers to run the Galacticus model
 
-# DISCLAIMER: THIS IS A WORK IN PROGRESS AND ABSOLUTELY NOT SUPPORTED AT THIS TIME. 
-# USAGE OF THE SOFTWARE ACCESSIBLE FROM THIS REPOSITORY IS NOT RECOMMENDED TO ANYONE OUTSIDE OF THE CORE DATA SCIENCE PROJECT TEAM.
+# DISCLAIMER: THIS SOFTWARE IS PROVIDED WITH ABSOLUTELY NO SUPPORT OR RESPONSABILITY.
 
 ## Quick Start
 
@@ -16,8 +15,11 @@ The following instructions show how to quickly execute a Galacticus run using th
 * Start a container from the image:
   * docker run --rm --name galacticus -it galacticus/galacticus:latest bash
 
-* Once inside the container, run the model with sample parameters. This will generate a file named 'galacticus.hdf5' in the local directory
+* Once inside the container, run the model with sample parameters. This will generate a file named 'galacticus.hdf5' in the local directory. For example:
   * ./Galacticus.exe parameters/quickTest.xml
+    * (will complete in about a minute).
+  * ./Galacticus.exe parameters/snapshotExampleMPI_193.xml
+    * (will take around 15 minutes)
 
 * Copy the output file from the Docker container to the local host. Start another terminal window:
   * docker cp galacticus:/usr/local/galacticus/galacticus.hdf5 .
