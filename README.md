@@ -20,7 +20,8 @@ The following instructions show how to quickly execute a Galacticus run using th
     * (will complete in about a minute).
   * ./Galacticus.exe parameters/snapshotExampleMPI_193.xml
     * (will take around 15 minutes)
-
+  You can obsviouly modify the existence sample parameter files, or provide your own
+  
 * Copy the output file from the Docker container to the local host. Start another terminal window:
   * docker cp galacticus:/usr/local/galacticus/galacticus.hdf5 .
 
